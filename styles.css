@@ -1,0 +1,162 @@
+/* Palette sampled from media/logo.png */
+:root {
+  --space-black: #040203;
+  --gold: #f2a524;
+  --cream: #f3d6a8;
+  --latte: #d4ae7e;
+  --copper: #e59255;
+  --rust: #943e18;
+  --espresso: #63483b;
+  --cosmic-blue: #285979;
+  --swoosh-blue: #53c9f3;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--space-black);
+  color: var(--cream);
+  font-family: "Lato", system-ui, sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Glows live on their own layer (not body) so the logo's blend mode can see them */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 85%, rgb(148 62 24 / 0.18), transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgb(40 89 121 / 0.22), transparent 55%);
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, var(--cream), transparent),
+    radial-gradient(1px 1px at 80% 10%, var(--swoosh-blue), transparent),
+    radial-gradient(1.5px 1.5px at 30% 70%, var(--gold), transparent),
+    radial-gradient(1px 1px at 65% 85%, var(--cream), transparent),
+    radial-gradient(1px 1px at 90% 55%, var(--copper), transparent),
+    radial-gradient(1.5px 1.5px at 5% 50%, var(--swoosh-blue), transparent),
+    radial-gradient(1px 1px at 45% 5%, var(--cream), transparent),
+    radial-gradient(1px 1px at 95% 90%, var(--gold), transparent);
+  background-size: 400px 400px;
+  opacity: 0.7;
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.4; }
+  to   { opacity: 0.85; }
+}
+
+main {
+  position: relative;
+  width: min(100%, 640px);
+  padding: 2rem 1.5rem 3rem;
+}
+
+.logo {
+  display: block;
+  width: min(100%, 520px);
+  height: auto;
+  margin: 0 auto 1rem;
+  /* The logo sits on an opaque black square; lighten lets the page glows show through it */
+  mix-blend-mode: lighten;
+}
+
+.opening {
+  margin: 0 0 0.75rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.opening span {
+  display: inline-block;
+  color: var(--gold);
+  border-bottom: 3px solid var(--swoosh-blue);
+  padding-bottom: 0.1em;
+}
+
+.address {
+  margin: 0 0 1.75rem;
+  font-style: normal;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+.address a {
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.address a:hover,
+.address a:focus-visible {
+  color: var(--swoosh-blue);
+  text-decoration: underline;
+}
+
+.soon {
+  margin: 0 auto 2rem;
+  max-width: 28rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--latte);
+}
+
+.contact {
+  margin: 0;
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid rgb(242 165 36 / 0.5);
+  border-radius: 999px;
+  font-size: 1rem;
+  color: var(--latte);
+}
+
+.contact a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact a:hover,
+.contact a:focus-visible {
+  color: var(--swoosh-blue);
+  text-decoration: underline;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stars { animation: none; }
+}
